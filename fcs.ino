@@ -28,8 +28,8 @@
  * --------fcs.ino - main file
  */
 
-#include "rx/receiver.h"
-#include "motors/motors.h"
+#include "receiver.h"
+#include "motors.h"
 #include "config.h"
 #include "log.h"
 #include "Serial.h"
