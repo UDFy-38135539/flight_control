@@ -30,10 +30,53 @@
 
 #include "rx/receiver.h"
 #include "motors/motors.h"
+#include "config.h"
+#include "log.h"
+#include "Serial.h"
 
 void setup()
 {
-    //TODO init stuff here
+    Serial.begin(9600); /* may be uncompatible with second UART initialization (RX)*/
+    LOGV("Starting initialization of the hardware!...");
+
+    char receiver_flag = init_receiver(CSRF_TX, CSRF_RX);
+    char motors_flag   = init_motors(SERVO_YAW, SERVO_PITCH, SERVO_ROLL);
+
+    if (receiver_flag != FLAG_OK)
+    {
+        LOGE("Receiver initialization failed, error code: %3i", receiver_flag);       
+        while(1) {} /* loop until the device's reset*/
+    }
+    else
+    {
+        LOGI("Receiver is OK...");
+    }
+    if (motors_flag != FLAG_OK)
+    {
+        LOGE("Motors initialization failed, error code: %3i", motors_flag);       
+        while(1) {} 
+    }
+    else
+    {
+        LOGI("Motors are OK...");
+    }
+
+    char pairing_status = receiver_wait2pair(PAIRING_TIMEOUT_S);
+
+    if (pairing_status != FLAG_OK || pairing_status != FLAG_PAIRING_TIMEOUT)
+    {
+        LOGE("Receiver pairing failed, error code: %3i", motors_flag);       
+        while(1) {} 
+    }
+    else if (pairing_status == FLAG_PAIRING_TIMEOUT)
+    {
+        LOGW("Packet timeout reached! Check your remote, then reset the system!");
+        while(1) {}
+    }
+    else
+    {
+        LOGI("Device connected!");
+    }
 }
 
 void loop()

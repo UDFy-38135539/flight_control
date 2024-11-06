@@ -31,4 +31,12 @@
 #define CSRF_TX       0//TODO USART TX FOR RECEIVER
 #define CSRF_RX       0//TODO USART RX FOR RECEIVER
 
+/* Time to wait for the packet frames from the RX*/
+#define PAIRING_TIMEOUT_S 60
+
+/* STATUS FLAGS (CODES) */
+#define FLAG_OK              0b00000000
+#define FLAG_ERR_UNKN        0b11111111
+#define FLAG_PAIRING_TIMEOUT 0b10000000
+
 //TODO
