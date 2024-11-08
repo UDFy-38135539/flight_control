@@ -40,3 +40,5 @@
 #define FLAG_PAIRING_TIMEOUT 0b10000000
 
 //TODO
+
+typedef unsigned char uint8_t;

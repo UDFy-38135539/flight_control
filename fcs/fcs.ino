@@ -32,15 +32,21 @@
 #include "motors.h"
 #include "config.h"
 #include "log.h"
-#include "Serial.h"
+#include "stdio.h"
+//#include "Serial.h" 
 
 void setup()
 {
-    Serial.begin(9600); /* may be uncompatible with second UART initialization (RX)*/
-    LOGV("Starting initialization of the hardware!...");
+  //printf();
+  //printf_P();
+    Serial.begin(115200); /* may be uncompatible with second UART initialization (RX)*/
+    //Serial.flush();
+    printf_begin();
+    Serial.println("text");
+    LOGV("%s","Starting initialization of the hardware!...");
 
     char receiver_flag = init_receiver(CSRF_TX, CSRF_RX);
-    char motors_flag   = init_motors(SERVO_YAW, SERVO_PITCH, SERVO_ROLL);
+    char motors_flag   = init_motors(SERVO_YAW, SERVO_PITCH, SERVO_ROLL, MOTOR_CTRL);
 
     if (receiver_flag != FLAG_OK)
     {
@@ -82,4 +88,16 @@ void setup()
 void loop()
 {
     //TODO actual code here
+}
+
+int serial_putc(char c, FILE *) 
+{
+  Serial.write(c);
+
+  return c;
+} 
+
+void printf_begin(void)
+{
+  fdevopen(&serial_putc, 0);
 }
