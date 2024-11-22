@@ -12,7 +12,7 @@
  * Active Developers:
  * @SamcraftSam
  * @abell1835IR
- * @Aldik314
+ * 
  * (you can become the maintainer as well!)
  * 
  * =======================================================================================================
@@ -37,8 +37,6 @@
 
 void setup()
 {
-  //printf();
-  //printf_P();
     Serial.begin(115200); /* may be uncompatible with second UART initialization (RX)*/
     //Serial.flush();
     printf_begin();
