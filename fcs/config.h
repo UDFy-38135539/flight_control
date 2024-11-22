@@ -5,7 +5,7 @@
  * Maintainer should shortly describe the purpose of the macro. 
  * 
  * 
- * DO NOT change values of the CONFIG MACROS unless you know what you are doing!
+ * DO NOT change values of the CONFIG MACROS unless you know what are you doing!
  *                                    (e.g. configuring throttle values for compatibillity with your motor driver)
  * DO NOT change values of the SYSTEM MACROS unless you REALLY know what you are doing!
  *                                    (e.g. you are porting the firmware to another chip rn) 
@@ -17,7 +17,15 @@
  *                                         CONFIG MACROS
  *  ============================================================================================ */
 
-//TODO
+/* motor driver values  */
+#define THROTTLE_ZERO 0
+#define THROTTLE_MAX  0
+
+/* servo default values */
+#define YAW_NORMAL    0
+#define ROLL_NORMAL   0
+#define RUD_NORMAL    0
+
 
 /** ============================================================================================
  *                                         SYSTEM MACROS
